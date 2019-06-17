@@ -8,6 +8,7 @@ User = get_user_model()
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.CharField(max_length=250)
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -16,6 +17,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.CharField(max_length=250)
     description = models.TextField(blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)

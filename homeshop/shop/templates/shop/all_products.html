@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Products</title>
+</head>
+<body>
+    {{ for product in products }}
+        <p>product.name</p>
+        <p>product.category</p>
+    {{ endfor }}
+</body>
+</html>
