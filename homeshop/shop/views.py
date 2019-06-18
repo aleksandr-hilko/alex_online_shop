@@ -1,10 +1,10 @@
-from django.shortcuts import render
-from django.urls import reverse
-
-from .models import Category, Product
-from django.http import Http404, HttpResponseRedirect
+from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.shortcuts import render
+
 from . import forms
+from .models import Category, Product
 
 
 # Create your views here.
@@ -17,7 +17,12 @@ def all_products(request, c_slug=None):
     else:
         products = Product.objects.all()
     categories = Category.objects.all()
-    
+
+    paginator = Paginator(products, 5)
+    page = request.GET.get('page')
+    print(f"Request-{request.GET}, Page-{page}")
+    products = paginator.get_page(page)
+
     return render(request, 'shop/all_products.html', {"products": products, "categories": categories})
 
 
