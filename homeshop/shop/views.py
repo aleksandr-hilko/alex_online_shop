@@ -1,7 +1,8 @@
 from django.core.paginator import Paginator
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.urls import reverse
 
 from . import forms
 from .models import Category, Product
@@ -34,14 +35,38 @@ def product_detail(request, p_slug=None):
 
 def add_product(request):
     if request.method == "POST":
-        form = forms.ProductForm(request.user, request.POST)
+        form = forms.ProductForm(request.POST)
         if form.is_valid():
             product = form.save(commit=False)
-            print(request.FILES)
-            product.image = request.FILES['image']
+            product.author = request.user
+            product.image = request.FILES.get('image')
             product.save()
             url = product.get_url()
             return HttpResponseRedirect(url)
     else:
         form = forms.ProductForm()
     return render(request, 'shop/add_product.html', {"form": form})
+
+
+def update_product(request, p_slug):
+    product = get_object_or_404(Product, slug=p_slug)
+    if request.method == "POST":
+        form = forms.ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.image = request.FILES.get('image')
+            product.save()
+            url = product.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = forms.ProductForm()
+    return render(request, 'shop/edit_product.html', {"form": form})
+
+
+def remove_product(request, p_slug):
+    try:
+        product = get_object_or_404(Product, slug=p_slug)
+        product.delete()
+        return HttpResponseRedirect(reverse("shop:all_products"))
+    except:
+        return HttpResponseNotFound()

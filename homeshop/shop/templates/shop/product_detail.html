@@ -13,11 +13,7 @@
 			<div class="row">
 				<div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
 					<div style="min-width: 18rem;">
-                        {% if product.image %}
-						<img class="card-img-top my_image" src="{{product.image.url}}" alt="{{product.name}}">
-						{% else %}
-						<img class="card-img-top my_image" src="{% static 'img/no_image.png' %}" alt="No image available">
-						{% endif %}
+							<img class="card-img-top my_image" src="{{product.image_url}}" alt="{{product.name}}">
 					</div>
 				</div>
 				<div class="col-12 col-sm-12 col-md-12 col-lg-6">
@@ -26,8 +22,21 @@
 						<p>${{product.price}}</p>
 						<p class="my_title">Product Description</p>
 						<p class="text-justify my_prod_text">{{product.description}}</p>
+<!--						<a class="btn btn-danger" href="{% url 'shop:remove_product' p_slug=product.slug %}">Remove Product</a>-->
+						<hr/>
+						<span  style="font-size: 20px; color: red;">
+							<a href="{% url 'shop:remove_product' p_slug=product.slug %}"> <i class="fas fa-cut"></i> Remove Product</a>
+						</span>
+
+						<span  style="font-size: 20px; color: Dodgerblue;">
+							<a href="{% url 'shop:edit_product' p_slug=product.slug %}">
+								<i class="fas fa-edit"></i> Edit Product</a>
+						</span>
+
 					</div>
 				</div>
+
+
 			</div>
 		</div>
 	</div>

@@ -7,13 +7,9 @@
         {% for product in products.object_list %}
         <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
             <div class="card text-center" style="min-width: 18rem;">
-                {% if product.image %}
-                <a href="{{product.get_url}}"><img class="card-img-top my_image" src="{{product.image.url}}"
+                <a href="{{product.get_url}}"><img class="card-img-top my_image" src="{{product.image_url}}"
                                                    alt="{{product.name}}"></a>
-                {% else %}
-                <a href="{{product.get_url}}"><img class="card-img-top my_image" src="{% static 'img/no_image.png' %}"
-                                                   alt="No image available"></a>
-                {% endif %}
+
                 <div class="card-body">
                     <h4>{{product.name}}</h4>
                     <p>${{product.price}}</p>
@@ -53,16 +49,3 @@
     </nav>
 </div>
 {% endblock %}
-<!--<nav aria-label="Page navigation example">-->
-<!--  <ul class="pagination justify-content-center">-->
-<!--    <li class="page-item disabled">-->
-<!--      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>-->
-<!--    </li>-->
-<!--    <li class="page-item"><a class="page-link" href="#">1</a></li>-->
-<!--    <li class="page-item"><a class="page-link" href="#">2</a></li>-->
-<!--    <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-<!--    <li class="page-item">-->
-<!--      <a class="page-link" href="#">Next</a>-->
-<!--    </li>-->
-<!--  </ul>-->
-<!--</nav>-->

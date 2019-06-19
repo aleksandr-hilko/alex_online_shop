@@ -56,3 +56,17 @@ class Product(models.Model):
 
     def get_url(self):
         return reverse('shop:product_detail', args=[self.slug])
+
+    def image_url(self):
+        """
+        Returns the URL of the image associated with this Object.
+        If an image hasn't been uploaded yet, it returns a stock image
+
+        :returns: str -- the image url
+
+        """
+
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            return '/static/img/no_image.png'
