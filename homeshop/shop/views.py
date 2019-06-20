@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import get_object_or_404
@@ -33,6 +34,7 @@ def product_detail(request, p_slug=None):
     return render(request, 'shop/product_detail.html', {"product": product, "categories": categories})
 
 
+@login_required
 def add_product(request):
     if request.method == "POST":
         form = forms.ProductForm(request.POST)
