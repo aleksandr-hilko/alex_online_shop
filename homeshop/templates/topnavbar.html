@@ -1,24 +1,14 @@
 <div class="container">
-    <div class="my_custom_menu">
-        <ul>
-            <li>
-                <form action="{% url 'search:search' %}" method="GET" class="form-inline">
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label for="search" class="sr-only">Product name</label>
-                        <input type="text" class="form-control" id="search"  name="q" placeholder="Product name">
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-2">Find</button>
-                </form>
-            </li>
-            <li>
+    <nav class="tnb navbar navbar-expand-lg navbar-light bg-light">
+        {% if user.is_authenticated %}
+            <h5 >Welcome, {{ user.username }} <i class="fas fa-user-circle"></i></h5>
+            <div class="tnb left-section">
                 <a class="nav-link" href="{% url 'shop:add_product' %}">Add Product</a>
-            </li>
-        </ul>
-
-    </div>
+                <a class="nav-link" href="{% url 'accounts:signout' %}"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+            </div>
+        {% else %}
+            <a class="nav-link" href='{% url "accounts:signin" %}'><i class="fas fa-sign-in-alt"></i> Sign In</a>
+            <a class="nav-link" href='{% url "accounts:signup" %}'><i class="fas fa-user-plus"></i> Sign Up</a>
+        {% endif%}
+    </nav>
 </div>
-<!--<div class="container">-->
-<!--	<div class="my_custom_menu">-->
-<!--    <a class="nav-link" href="{% url 'shop:add_product' %}">Add Product</a>-->
-<!--	</div>-->
-<!--</div>-->

@@ -12,9 +12,11 @@
                     {% endfor %}
                 </div>
             </li>
-            {% for category in categories %}
-                    <a class="nav-link {% if category.slug in request.path %}active{% endif %}" href={{category.get_url}}>{{ category }}</a>
-            {% endfor %}
         </ul>
-    </div>
+            </div>
+        <form action="{% url 'search:search' %}" method="GET" class="form-inline my-2 my-lg-0">
+            <input type="search" class="form-control mr-sm-2" id="search" name="q" placeholder="Search">
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+        </form>
+<!--    </div>-->
 </nav>

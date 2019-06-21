@@ -1,9 +1,25 @@
+
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.utils.text import slugify
 
 User = get_user_model()
+
+
+class Region(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class City(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 # Create your models here.
@@ -39,9 +55,10 @@ class Product(models.Model):
     image = models.ImageField(blank=True, upload_to="shop")
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    location = models.ForeignKey(City, on_delete=models.CASCADE, default="")
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('-added',)
         verbose_name = 'product'
         verbose_name_plural = 'products'
 

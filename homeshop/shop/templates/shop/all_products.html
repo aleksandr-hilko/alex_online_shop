@@ -1,18 +1,50 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img src="..." class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                    content. This content is a little bit longer.</p>
+                <p class="card-text">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% block content %}
 <div class="container">
     <div class="row mx-auto">
         {% for product in products.object_list %}
-        <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
-            <div class="card text-center" style="min-width: 18rem;">
-                <a href="{{product.get_url}}"><img class="card-img-top my_image" src="{{product.image_url}}"
-                                                   alt="{{product.name}}"></a>
+        <!--        <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">-->
+        <!--            <div class="card text-center" style="min-width: 18rem;">-->
+        <!--                <a href="{{product.get_url}}"><img class="card-img-top my_image" src="{{product.image_url}}"-->
+        <!--                                                   alt="{{product.name}}"></a>-->
 
-                <div class="card-body">
-                    <h4>{{product.name}}</h4>
-                    <p>${{product.price}}</p>
+        <!--                <div class="card-body">-->
+        <!--                    <h4>{{product.name}}</h4>-->
+        <!--                    <p>${{product.price}}</p>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <a href="{{product.get_url}}"><img src="{{product.image_url}}" class="card-img"
+                                                       alt="{{product.name}}"></a>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h4>{{product.name}}</h4>
+                        <p>${{product.price}}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -26,7 +58,8 @@
             <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
             {% endif %}
             {% if products.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">{{products.previous_page_number }}</a>
+            <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">{{products.previous_page_number
+                }}</a>
             </li>
             {% endif %}
 
@@ -39,7 +72,8 @@
             </li>
 
             {% if products.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">{{products.next_page_number }}</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">{{products.next_page_number
+                }}</a></li>
             {% endif %}
             {% if products.number|add:"1" < products.paginator.num_pages %}
             <li class="page-item"><a class="page-link" href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
